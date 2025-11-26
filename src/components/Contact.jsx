@@ -4,7 +4,7 @@ import Marquee from './Marquee'
 
 const Contact = () => {
     return (
-        <section id="contact" className="min-h-[80vh] w-full bg-[var(--midnight)] flex flex-col items-center justify-center relative overflow-hidden">
+        <section id="contact" className="min-h-[80vh] w-full bg-[var(--midnight)] flex flex-col items-center justify-center relative overflow-hidden py-48 md:py-64">
             <div className="absolute top-0 w-full z-30">
                 <Marquee />
             </div>

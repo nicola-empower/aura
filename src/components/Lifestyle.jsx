@@ -113,7 +113,7 @@ const Lifestyle = () => {
     ]
 
     return (
-        <section id="services" ref={containerRef} className="min-h-[200vh] w-full bg-[var(--midnight)] relative overflow-hidden py-24">
+        <section id="services" ref={containerRef} className="min-h-[200vh] w-full bg-[var(--midnight)] relative overflow-hidden py-48 md:py-64">
             {/* Background Elements */}
             <div className="absolute inset-0 flex justify-between px-8 md:px-16 pointer-events-none">
                 <div className="h-full w-px bg-[var(--silk)] opacity-10"></div>

@@ -3,7 +3,7 @@ import vid3 from '../assets/vid3.mp4'
 
 const Philosophy = () => {
     return (
-        <section id="philosophy" className="min-h-screen w-full bg-[var(--silk)] text-[var(--midnight)] py-24 px-8 md:px-16 flex flex-col md:flex-row items-center gap-8 md:gap-16">
+        <section id="philosophy" className="min-h-screen w-full bg-[var(--silk)] text-[var(--midnight)] py-32 md:py-48 px-8 md:px-16 flex flex-col md:flex-row items-center gap-8 md:gap-16">
             {/* Left Side - Video/Image */}
             <div className="w-full md:w-1/2 h-[60vh] md:h-[80vh] relative mb-12 md:mb-0">
                 <motion.div
