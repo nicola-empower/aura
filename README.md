@@ -2,18 +2,20 @@
 
 A high-end, video-heavy personal branding website built with modern web technologies.
 
+**Live Site:** [https://aura-nine-ochre.vercel.app/](https://aura-nine-ochre.vercel.app/)
+
 ## Tech Stack
 
-### The Core (The Skeleton)
-- **React + Vite**: Lightning-fast development and optimized production build.
+### The Core
+- **React + Vite**: Lightning-fast development and optimised production build.
 - **Semantic HTML5**: Accessible and SEO-friendly structure.
-- **CSS Modules / Variables**: "Midnight & Champagne" design system with easy-to-tweak variables.
+- **CSS Variables**: "Midnight & Champagne" design system with easy-to-tweak variables.
 
-### The "Magic" (The Animation Engine)
+### The Animation Engine
 - **Framer Motion**: Industry-standard animation library for React. Used for:
     - Complex entrance animations.
     - Scroll-triggered reveals.
-    - Parallax effects (The "Vogue Center Spine").
+    - Parallax effects (The "Vogue Centre Spine").
 - **Lenis Scroll**: A luxury smooth scrolling library that adds weight and inertia to the scroll experience, essential for the high-end feel.
 
 ### The Design System
@@ -42,5 +44,13 @@ A high-end, video-heavy personal branding website built with modern web technolo
 ## Project Structure
 
 - `src/components`: Reusable UI components (Hero, Philosophy, Lifestyle, Contact).
-- `src/styles`: Global styles and variables.
+- `src/assets`: Video and media files.
 - `src/App.jsx`: Main application layout.
+
+## Features
+
+- Video-heavy design with autoplay background videos
+- Responsive 2x2 grid layout for services section
+- Smooth scroll animations and parallax effects
+- Animated marquee banner
+- Mobile-responsive design

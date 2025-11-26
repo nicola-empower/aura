@@ -53,7 +53,13 @@ const Lifestyle = () => {
         offset: ["start end", "end start"]
     })
 
-    const y = useTransform(scrollYProgress, [0, 1], [0, -100])
+    // Enhanced parallax effect - Desktop only for that "visual tension"
+    // Videos drag behind the scroll, creating depth
+    const y = useTransform(
+        scrollYProgress,
+        [0, 1],
+        isMobile ? [0, 0] : [100, -200]  // Mobile: no parallax, Desktop: smooth drag
+    )
 
     const services = [
         {
@@ -103,15 +109,36 @@ const Lifestyle = () => {
                     </motion.h2>
                 </div>
 
-                {/* The Vogue Center Spine - Now 2x2 Grid */}
-                <div className="w-full max-w-6xl mx-auto relative pt-96 px-4">
-                    <motion.div style={{ y }} className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
-                        {services.map((service, index) => (
-                            <div key={index} className={index % 2 === 1 ? "md:mt-32" : ""}>
-                                <VideoCard {...service} index={index} videoSrc={service.video} />
+                {/* Two Column Layout: Scrolling Videos (Left) + Sticky Text (Right) */}
+                <div className="w-full max-w-7xl mx-auto relative pt-96 px-4">
+                    <div className="flex flex-col md:flex-row gap-16">
+                        {/* Left Side - Scrolling Video Spine */}
+                        <motion.div style={{ y }} className="w-full md:w-1/2 flex flex-col items-center space-y-16">
+                            {services.map((service, index) => (
+                                <VideoCard key={index} {...service} index={index} videoSrc={service.video} />
+                            ))}
+                        </motion.div>
+
+                        {/* Right Side - Fixed Manifesto Text */}
+                        <div className="hidden md:block w-full md:w-1/2">
+                            <div className="fixed right-[5%] top-[40vh] w-[40%] max-w-xl p-12">
+                                <div>
+                                    <h2 className="text-5xl lg:text-6xl font-serif text-[var(--silk)] mb-6">
+                                        THE BLUEPRINT.
+                                    </h2>
+                                    <p className="text-2xl text-[var(--gold)] font-bold mb-8 uppercase tracking-wider">
+                                        We do not fix, we build
+                                    </p>
+                                    <p className="text-lg text-[var(--silk)] leading-relaxed opacity-90">
+                                        True presence is not an act; it is an architecture. We strip back the noise, dismantle the doubt and reconstruct a reality where you are the authority.
+                                    </p>
+                                    <p className="text-xl text-[var(--gold)] font-serif italic mt-12">
+                                        Welcome to your new ERA.
+                                    </p>
+                                </div>
                             </div>
-                        ))}
-                    </motion.div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
