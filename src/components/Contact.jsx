@@ -1,9 +1,13 @@
 import { motion } from 'framer-motion'
 import video1 from '../assets/VID-20251126-WA0002.mp4'
+import Marquee from './Marquee'
 
 const Contact = () => {
     return (
         <section id="contact" className="min-h-[80vh] w-full bg-[var(--midnight)] flex flex-col items-center justify-center relative overflow-hidden">
+            <div className="absolute top-0 w-full z-30">
+                <Marquee />
+            </div>
             {/* Background Video Placeholder */}
             <div className="absolute inset-0 opacity-20 z-0">
                 <video
