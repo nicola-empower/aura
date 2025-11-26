@@ -19,16 +19,20 @@ const VideoCard = ({ title, subtitle, description, index, videoSrc }) => {
                 src={videoSrc}
             />
 
-            {/* Content Overlay - No black box, text directly over video */}
+            {/* Content Overlay */}
             <div className="relative z-20 text-center p-6 flex flex-col items-center justify-center h-full w-full">
                 <p className="text-[var(--silk)] opacity-70 text-sm tracking-widest uppercase mb-2" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>Service {index + 1}</p>
                 <h3 className="text-3xl font-serif text-[var(--silk)] mb-2" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.9)' }}>{title}</h3>
                 <p className="text-[var(--gold)] text-sm uppercase tracking-widest mb-4" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>{subtitle}</p>
 
-                {/* Description: Only visible on hover */}
-                <p className="text-[var(--silk)] text-sm leading-relaxed opacity-0 max-h-0 overflow-hidden group-hover:opacity-100 group-hover:max-h-96 transition-all duration-500 max-w-md" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
-                    {description}
-                </p>
+                {/* Description: Only visible on hover with glassmorphism */}
+                <div className="opacity-0 max-h-0 overflow-hidden group-hover:opacity-100 group-hover:max-h-96 transition-all duration-500">
+                    <div className="backdrop-blur-md bg-[rgba(18,18,18,0.2)] p-4 rounded-lg">
+                        <p className="text-[var(--silk)] text-base leading-relaxed max-w-md">
+                            {description}
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     )
@@ -37,6 +41,7 @@ const VideoCard = ({ title, subtitle, description, index, videoSrc }) => {
 const Lifestyle = () => {
     const containerRef = useRef(null)
     const [isMobile, setIsMobile] = useState(false)
+    const [isInView, setIsInView] = useState(false)
 
     useEffect(() => {
         const checkMobile = () => {
@@ -46,6 +51,25 @@ const Lifestyle = () => {
         checkMobile()
         window.addEventListener('resize', checkMobile)
         return () => window.removeEventListener('resize', checkMobile)
+    }, [])
+
+    // Track if section is in viewport
+    useEffect(() => {
+        const handleScroll = () => {
+            if (containerRef.current) {
+                const rect = containerRef.current.getBoundingClientRect()
+                const windowHeight = window.innerHeight
+
+                // Check if section is in view (with some buffer)
+                const inView = rect.top < windowHeight * 0.5 && rect.bottom > windowHeight * 0.3
+                setIsInView(inView)
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll)
+        handleScroll() // Check on mount
+
+        return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
     const { scrollYProgress } = useScroll({
@@ -109,7 +133,7 @@ const Lifestyle = () => {
                     </motion.h2>
                 </div>
 
-                {/* Two Column Layout: Scrolling Videos (Left) + Sticky Text (Right) */}
+                {/* Two Column Layout: Scrolling Videos (Left) + Fixed Text (Right) */}
                 <div className="w-full max-w-7xl mx-auto relative pt-96 px-4">
                     <div className="flex flex-col md:flex-row gap-16">
                         {/* Left Side - Scrolling Video Spine */}
@@ -119,9 +143,12 @@ const Lifestyle = () => {
                             ))}
                         </motion.div>
 
-                        {/* Right Side - Fixed Manifesto Text */}
+                        {/* Right Side - Fixed Manifesto Text (visible only in this section) */}
                         <div className="hidden md:block w-full md:w-1/2">
-                            <div className="fixed right-[5%] top-[40vh] w-[40%] max-w-xl p-12">
+                            <div
+                                className={`fixed right-[5%] top-[40vh] w-[40%] max-w-xl p-12 transition-opacity duration-500 ${isInView ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                                    }`}
+                            >
                                 <div>
                                     <h2 className="text-5xl lg:text-6xl font-serif text-[var(--silk)] mb-6">
                                         THE BLUEPRINT.
